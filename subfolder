@@ -1,0 +1,24 @@
+On Error Resume Next
+Set objShell=WScript.CreateObject("WScript.Shell")
+Set objFSO = CreateObject("Scripting.FileSystemObject")
+objStartFolder = "L:\"
+PathDegree=3
+
+TxtFileName="SubFolder_recursive.txt"
+Set TextFile = objFSO.CreateTextFile(TxtFileName, True)
+
+objShell.Popup "搜尋目錄中... 請稍候! 執行完畢後會自動打開結果文件.", 2 ,"處理中", 64
+
+ShowSubfolders objFSO.GetFolder(objStartFolder)
+TextFile.Close
+objShell.Run "notepad.exe " & TxtFileName
+
+Sub ShowSubFolders(Folder)
+	PathParse=Split(Folder.Path,"\")
+	If UBound(PathParse) < PathDegree THEN
+		For Each Subfolder in Folder.SubFolders
+			TextFile.WriteLine(Subfolder.path) 
+			ShowSubFolders Subfolder
+		Next
+	End If
+End Sub
