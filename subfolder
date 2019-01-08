@@ -7,7 +7,7 @@ PathDegree=3
 TxtFileName="SubFolder_recursive.txt"
 Set TextFile = objFSO.CreateTextFile(TxtFileName, True)
 
-objShell.Popup "搜尋目錄中... 請稍候! 執行完畢後會自動打開結果文件.", 2 ,"處理中", 64
+objShell.Popup "Directory Searching... Please Wait! Document will be open when finished.", 2 ,"Processing", 64
 
 ShowSubfolders objFSO.GetFolder(objStartFolder)
 TextFile.Close
