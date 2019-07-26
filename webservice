@@ -1,0 +1,25 @@
+strURL="http://faweb/itswebservice/ITSWebService.asmx?AspxAutoDetectCookieSupport=1"
+strXML="<soapenv:Envelope xmlns:soapenv="&chr(34)&"http://schemas.xmlsoap.org/soap/envelope/"&chr(34)&_
+	" xmlns:tem="&chr(34)&"http://tempuri.org/"&chr(34)&">" &_
+	"<soapenv:Header/>" &_
+	"<soapenv:Body>" &_
+		"<tem:GetLaserDeviceByLotId>" &_
+			"<!--Optional:-->" &_
+			"<tem:LotId>C180629011</tem:LotId>" &_
+		"</tem:GetLaserDeviceByLotId>" &_
+	"</soapenv:Body>" &_
+"</soapenv:Envelope>"
+
+Set xmlHTTP=CreateObject("MSXML2.XMLHTTP")
+xmlHTTP.open "POST",strURL,false
+xmlHTTP.setRequestHeader "Accept-Encoding","gzip,deflate"
+xmlHTTP.setRequestHeader "Content-Type","text/xml; charset=utf-8"
+xmlHTTP.setRequestHeader "SOAPAction", "http://tempuri.org/GetLaserDeviceByLotId"
+xmlHTTP.setRequestHeader "Host", "faweb"
+xmlHTTP.setRequestHeader "Content-Length",LEN(strXML)
+xmlHTTP.send strXML
+
+Set xmlDOC=CreateObject("MSXML2.DOMDocument")
+xmlDOC.loadXML xmlHTTP.ResponseText
+strRESPONSE=xmlDoc.selectSingleNode("//GetLaserDeviceByLotIdResult").text
+wscript.echo strRESPONSE
