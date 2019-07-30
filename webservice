@@ -12,10 +12,8 @@ strXML="<soapenv:Envelope xmlns:soapenv="&chr(34)&"http://schemas.xmlsoap.org/so
 
 Set xmlHTTP=CreateObject("MSXML2.XMLHTTP")
 xmlHTTP.open "POST",strURL,false
-xmlHTTP.setRequestHeader "Accept-Encoding","gzip,deflate"
 xmlHTTP.setRequestHeader "Content-Type","text/xml; charset=utf-8"
 xmlHTTP.setRequestHeader "SOAPAction", "http://tempuri.org/GetLaserDeviceByLotId"
-xmlHTTP.setRequestHeader "Host", "faweb"
 xmlHTTP.setRequestHeader "Content-Length",LEN(strXML)
 xmlHTTP.send strXML
 
